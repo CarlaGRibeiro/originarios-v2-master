@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Originarios.Models.Publicacao>
+
+@{ ViewBag.Title = "Divulgação"; }
+
+@foreach (var item in Model)
+{
+
+    <div style="text-align:left;">
+        @*----------------------------Div de publicação-------------------------------*@
+        <h2>@Html.DisplayFor(modelpublicacao => publicacao.titulo)</h2>
+
+        @*------------------------------ Imagem --------------------------------------*@
+        <img class="img-fluid"
+             src="@Url.Action("ObterImgNaView", "Publicacoes", new { id = Model.id_public, img = 1 })"
+             style="background-position: center top; background-repeat: no-repeat; background-size: cover; background-attachment: fixed; padding: 0 10px; width: 100%; border-width: medium; border-style: solid; border-color: black;">
+
+        @*-----------------------------------Corpo da publicação----------------------*@
+
+        <h4>@Html.DisplayFor(modelpublicacao => publicacao.autor)</h4>
+        <p>@Html.DisplayFor(modelpublicacao => publicacao.data)</p>
+        <p>@Html.DisplayFor(modelpublicacao => publicacao.locali)</p>
+        <p>
+            @Html.DisplayFor(modelpublicacao => publicacao.corpo)
+        </p>
+        <input type="button" value="submit" name="Ver na íntegra" href="@Url.Action("Integra", "Publicacao",new { id = item.id_publicacao })" class="text-info" />
+
+        }
+        @*------------------------Botão para retornar -> Publicações-------------------*@
+
+        @Html.ActionLink("Voltar", "Index", "Publicacoes", null, htmlAttributes: new { @class = "btn btn-light w-auto" })
+        <a class="btn btn-primary w-auto mx-sm-4" href=".\Index.cshtml">Voltar para a página de publicações</a>
+        }
